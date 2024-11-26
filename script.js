@@ -21,8 +21,9 @@ const phoneData = [
 ];
 const cardContainer = document.getElementById("cardContainer");
 
-function showUserData() {
-  phoneData.forEach((user) => {
+function showUserData(data) {
+  cardContainer.innerHTML = "";
+  data.forEach((user) => {
     cardContainer.innerHTML += `<div class="card"> 
                     <h3>${user.username} </h3>
                     <p>${user.mobileNumber}</p>
@@ -30,4 +31,16 @@ function showUserData() {
   });
 }
 
-showUserData();
+function searchUser() {
+  const inputField = document.getElementById("inputField");
+  const searchQuary = inputField.value.toLowerCase();
+  const filterdData = phoneData.filter((users) => {
+    if (users.username.toLowerCase().includes(searchQuary)) {
+      return true;
+    }
+  });
+
+  showUserData(filterdData);
+}
+
+showUserData(phoneData);
